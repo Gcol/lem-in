@@ -13,7 +13,8 @@ void print_res(t_res *res)
   while(tmp)
   {
     path = tmp->path;
-    printf("Resultat de  : %s\nNb_ant = %lld\n", tmp->name, tmp->ant_left);
+    printf("Resultat de  : %s Nb_tour = %lld ", tmp->name, tmp->Nb_tour);
+    printf("Nb_ant = %lld\n", tmp->ant_left);
     while(path)
     {
       room = path->room;

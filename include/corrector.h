@@ -26,6 +26,7 @@ typedef struct s_res
   char *name;
   unsigned long long ant_left;
   t_path *path;
+  unsigned long long Nb_tour;
   struct s_res *next;
 } t_res;
 

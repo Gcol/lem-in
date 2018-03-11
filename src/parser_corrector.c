@@ -79,9 +79,9 @@ t_res *read_file(char *file, int error, int state, t_res *res)
 		{
       if (state == 0 && ft_isalnum(*line) && (state = 1))
         res->ant_left = ft_atoi(line);
-      if (state == 3)
+      if (state == 3 && ++res->Nb_tour)
 			   act_path(res, line, -1);
-      if (state == 2 && (state = 3))
+      if (state == 2 && (state = 3) && ++res->Nb_tour)
 				res->path = init_path(line, -1, NULL, NULL);
 			state = (!line[0] && state == 1) ? 2 : state;
 			ft_memdel((void **)&line);
