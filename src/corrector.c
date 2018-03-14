@@ -7,15 +7,15 @@ void print_res(t_res *res)
 {
   t_res *tmp;
   t_path *path;
-  t_room *room;
+  //t_room *room;
 
   tmp = res;
   while(tmp)
   {
     path = tmp->path;
-    printf("Resultat de  : %s Nb_tour = %lld ", tmp->name, tmp->Nb_tour);
-    printf("Nb_ant = %lld\n", tmp->ant_left);
-    while(path)
+    printf(/*"Resultat de  : %s */"Nb_tour = %lld\n", /*tmp->name, */tmp->Nb_tour);
+    //printf("Nb_ant = %lld\n", tmp->ant_left);
+    /*while(path)
     {
       room = path->room;
       while(room)
@@ -27,7 +27,7 @@ void print_res(t_res *res)
       }
       printf(" length = %lld : ant_lauch = %lld\n", path->length, path->nb_ant);
       path = path->next;
-    }
+    }*/
     tmp = tmp->next;
     printf("\n\n");
   }

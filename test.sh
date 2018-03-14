@@ -1,3 +1,5 @@
-./../lem_in/lem-in < $1 > fel.txt;
-./../lem-in/lem-in < $1 > you.txt;
+path="../lem-in/maps/model_3"
+
+./../lem_in/lem-in < $path > fel.txt;
+./../lem-in/lem-in < $path > you.txt;
 ./corrector_lem_in fel.txt you.txt;
