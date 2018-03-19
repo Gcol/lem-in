@@ -15,9 +15,9 @@ LIB_DIR = libft
 
 ## Compilating Utilities
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 INC = $(INC_DIR:%=-I ./%)
-LIB = -L $(LIB_DIR) -lft
+LIB = -fsanitize=address -L $(LIB_DIR) -lft
 CC = clang $(FLAGS) $(INC)
 
 ## List of Functions
