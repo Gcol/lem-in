@@ -1,0 +1,153 @@
+#ants
+3
+a 0 0
+##start
+b 0 4
+c 2 2
+d 4 0
+e 3 4
+f 6 2
+g 6 4
+h 5 7
+i 9 0
+j 9 4
+k 9 6
+l 7 8
+##end
+m 12 4
+n 12 8
+a-b
+b-e
+e-g
+g-j
+j-m
+a-d
+d-i
+i-j
+b-c
+c-f
+f-g
+e-h
+h-l
+l-n
+n-m
+g-k
+k-m
+total_len = 3
+tmp->state = 2
+room = f | room->locked = 0
+tmp->state = 3
+room = i | room->locked = 0
+set : 3 tmp->conflict = 0
+j - i - d - a - 
+here
+total_len = 12
+total_len = 12
+tmp->state = 2
+room = f | room->locked = 0
+set : 2 tmp->conflict = 0
+j - i - d - a - 
+k - g - f - c - 
+here
+total_len = 18
+total_len = 18
+a:
+->b
+->d
+b:
+->a
+->e
+->c
+c:
+->b
+->f
+d:
+->a
+->i
+e:
+->b
+->g
+->h
+f:
+->c
+->g
+g:
+->e
+->j
+->f
+->k
+h:
+->e
+->l
+i:
+->d
+->j
+j:
+->g
+->m
+->i
+k:
+->g
+->m
+l:
+->h
+->n
+m:
+->j
+->n
+->k
+n:
+->l
+->m
+
+L1-a L2-c L3-e 
+L1-d L2-f L3-h 
+L1-i L2-g L3-l 
+L1-j L2-k L3-n 
+L1-m L2-m L3-m 
+#ants
+3
+a 0 0
+##start
+b 0 4
+c 2 2
+d 4 0
+e 3 4
+f 6 2
+g 6 4
+h 5 7
+i 9 0
+j 9 4
+k 9 6
+l 7 8
+##end
+m 12 4
+n 12 8
+a-b
+b-e
+e-g
+g-j
+j-m
+a-d
+d-i
+i-j
+b-c
+c-f
+f-g
+e-h
+h-l
+l-n
+n-m
+g-k
+k-m
+
+L1-e
+L1-g L2-e
+L1-k L2-g L3-e
+L1-m L2-k L3-g
+L2-m L3-k
+L3-m
+1c1
+< Nb_tour = 6
+---
+> Nb_tour = 5
