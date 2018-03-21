@@ -35,8 +35,8 @@ typedef struct	s_dlist
 typedef	struct	s_memory
 {
 	int				fd;
-	int				pm;
 	char			*buf;
+	int				taille_buf;
 	struct s_memory	*next;
 	struct s_memory	*prev;
 }				t_memory;

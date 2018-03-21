@@ -13,10 +13,20 @@ do
 	do
 		echo "#ants\n"$ant > model_test
 		tail -n +2 $i >> model_test
-		./../felix_lemin/lem-in < model_test > fel.txt
-		./../lem-in/lem-in < model_test > you.txt
+		./../lem_in/lem-in < model_test > fel.txt
+		./../vsporer/lem-in < model_test > you.txt
 		./corrector_lem_in fel.txt > fel1.txt
+		if [[ $? -ne 0 ]]
+		then
+			cp fel.txt fel_error.txt
+			break
+		fi
 		./corrector_lem_in you.txt > you1.txt
+		if [[ $? -ne 0 ]]
+		then
+			cp you.txt you_error.txt
+			break
+		fi
 		diff fel1.txt you1.txt > /dev/null
 		if [[ $? -ne 0 ]]
 		then

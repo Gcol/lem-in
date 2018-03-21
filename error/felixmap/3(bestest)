@@ -33,77 +33,11 @@ l-n
 n-m
 g-k
 k-m
-total_len = 3
-tmp->state = 2
-room = f | room->locked = 0
-tmp->state = 3
-room = i | room->locked = 0
-set : 3 tmp->conflict = 0
-j - i - d - a - 
-here
-total_len = 12
-total_len = 12
-tmp->state = 2
-room = f | room->locked = 0
-set : 2 tmp->conflict = 0
-j - i - d - a - 
-k - g - f - c - 
-here
-total_len = 18
-total_len = 18
-a:
-->b
-->d
-b:
-->a
-->e
-->c
-c:
-->b
-->f
-d:
-->a
-->i
-e:
-->b
-->g
-->h
-f:
-->c
-->g
-g:
-->e
-->j
-->f
-->k
-h:
-->e
-->l
-i:
-->d
-->j
-j:
-->g
-->m
-->i
-k:
-->g
-->m
-l:
-->h
-->n
-m:
-->j
-->n
-->k
-n:
-->l
-->m
 
-L1-a L2-c L3-e 
-L1-d L2-f L3-h 
-L1-i L2-g L3-l 
-L1-j L2-k L3-n 
+L1-e L2-c L3-a 
+L1-h L2-f L3-d 
+L1-l L2-g L3-i 
+L1-n L2-k L3-j 
 L1-m L2-m L3-m 
 #ants
 3
