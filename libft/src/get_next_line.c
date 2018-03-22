@@ -29,7 +29,22 @@ t_memory		*free_factory(t_memory *save)
 	return (tmp);
 }
 
-t_memory		*load_save(t_memory *save, int fd, char **line, int *cmp_line)
+char *ft_realloc_line(char *data, int add_size, int old_size)
+{
+	char *res;
+	int cmp;
+
+	cmp = -1;
+	res = ft_memalloc_exit(add_size + old_size + 2);
+	while (++cmp < old_size + 1)
+		res[cmp] = data[cmp];
+	free(data);
+	data = NULL;
+	return (res);
+}
+
+
+t_memory		*load_save(t_memory *save, int fd, char **line)
 {
 	t_memory *recup;
 
@@ -40,9 +55,12 @@ t_memory		*load_save(t_memory *save, int fd, char **line, int *cmp_line)
 			save = save->next;
 		while (save->prev && save->fd != fd)
 			save = save->prev;
-		if (save->fd != fd)
-			while(++(*cmp_line) < save->taille_buf)
-				*line[*cmp_line] = save->buf[*cmp_line];
+		save->cmp_line = -1;
+		if (save->fd == fd && save->cmp_buf < save->taille_buf)
+			*line = ft_realloc_line(*line, save->taille_buf, save->cmp_line);
+		if (save->fd == fd && save->cmp_buf < save->taille_buf)
+			while(save->buf[++save->cmp_buf] != '\n' && save->cmp_buf < save->taille_buf)
+				(*line)[++save->cmp_line] = save->buf[save->cmp_buf];
 	}
 	if (!save || save->fd != fd)
 	{
@@ -50,68 +68,31 @@ t_memory		*load_save(t_memory *save, int fd, char **line, int *cmp_line)
 		save->fd = fd;
 		save->next = recup;
 		save->buf = ft_memalloc_exit(BUFF_SIZE + 1);
+		save->cmp_line = -1;
 	}
 	return (save);
 }
-
-char *ft_realloc_line(char *data, int add_size, int old_size)
-{
-	char *res;
-	int cmp;
-
-	cmp = -1;
-	res = ft_memalloc_exit(add_size + old_size + 1);
-	while (++cmp < old_size)
-		res[cmp] = data[cmp];
-	ft_memdel((void **)&data);
-	return (res);
-}
-
-void load_buff(t_memory *save, int nb_read, int cmp_buf)
-{
-	int i;
-
-	i = 0;
-	while (i + cmp_buf < nb_read)
-	{
-		save->buf[i] = save->buf[i + cmp_buf];
-		i++;
-	}
-	while(i < nb_read)
-	{
-		save->buf[i] = '\0';
-		i++;
-	}
-}
-
 
 int get_next_line(const int fd, char **line)
 {
 	static t_memory	*save = NULL;
 	int							nb_read;
-	int						cmp_line;
-	int						cmp_buf;
 
-	cmp_line = -1;
-	cmp_buf = 0;
+	nb_read = 0;
 	if (fd < 0 || BUFF_SIZE < 1 || !line)
 		return (-1);
-	save = load_save(save, fd, line, &cmp_line);
-	while (save->buf[cmp_buf] != '\n' && (nb_read = read(fd, save->buf, BUFF_SIZE)) > 0)
+	save = load_save(save, fd, line);
+	while (save->buf[save->cmp_buf] != '\n' &&
+	(nb_read = read(fd, save->buf, BUFF_SIZE)) > 0)
 	{
-		cmp_buf = -1;
-		*line = ft_realloc_line(*line, nb_read, cmp_line);
+		*line = ft_realloc_line(*line, nb_read, save->cmp_line);
 		save->taille_buf = nb_read;
-		while (++cmp_buf < nb_read && save->buf[cmp_buf] != '\n')
-		{
-			printf("cmp_buf = %d\n",cmp_buf);
-			*line[++cmp_line] = save->buf[cmp_buf];
-
-				printf("cmp_buf = %d\n",cmp_buf);
-		}
+		save->cmp_buf = -1;
+		while (++save->cmp_buf < nb_read && save->buf[save->cmp_buf] != '\n')
+			(*line)[++save->cmp_line] = save->buf[save->cmp_buf];
 	}
-	printf("nb_read = %d\n",nb_read);
-	load_buff(save, nb_read, cmp_buf);
+	if (save->buf[save->cmp_buf] == '\n' && save->cmp_buf != save->taille_buf)
+		nb_read = 1;
 	if (nb_read < 0 && !save->taille_buf)
 		free_factory(save);
 	nb_read = (nb_read > 0) ? 1 : 0;

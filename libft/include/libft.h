@@ -37,6 +37,8 @@ typedef	struct	s_memory
 	int				fd;
 	char			*buf;
 	int				taille_buf;
+	int				cmp_line;
+	int				cmp_buf;
 	struct s_memory	*next;
 	struct s_memory	*prev;
 }				t_memory;

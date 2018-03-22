@@ -77,7 +77,6 @@ t_res *read_file(char *file, int error, int state, t_res *res)
 	if (fd > 0 && (res = ft_memalloc_exit(sizeof(t_res))))
 		while (get_next_line(fd, &line) > 0 && !error)
 		{
-      printf("line = %s\n", line);
       if (state == 0 && ft_isalnum(*line) && (state = 1))
         res->ant_left = ft_atoi(line);
       if (state == 3 && ++res->Nb_tour)

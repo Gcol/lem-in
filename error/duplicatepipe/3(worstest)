@@ -1,0 +1,14 @@
+#ants
+3
+##start
+start 0 0
+##end
+end 0 0
+start-end
+
+L1-end L2-end L3-end 
+connect start to end, really ?
+1c1
+< Nb_tour = 0
+---
+> Nb_tour = 1

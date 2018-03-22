@@ -14,8 +14,8 @@ SRC_DIR = src
 
 ## Compilating Utilities
 
-FLAGS = -Wall -Wextra -Werror -Ofast
-INC = $(INC_DIR:%=-I ./%)
+FLAGS = -Wall -Wextra -Werror# -Ofast
+INC = -g $(INC_DIR:%=-I ./%)
 LIB = -L $(LIB_DIR) -lft
 CC = clang $(FLAGS) $(INC)
 
