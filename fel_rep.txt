@@ -1,2 +1,0 @@
-Nb_tour = 24 
-Nb_ant = 42
